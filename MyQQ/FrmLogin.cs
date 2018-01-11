@@ -109,7 +109,8 @@ where id = '{0}' and LoginPwd = '{1}'",txtId.Text.Trim(),txtLoginPwd.Text.Trim()
         /// <param name="e"></param>
         private void lnkLblRegist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            FrmRegister frmRegister = FrmRegister.CreateFrmRegister();
+            frmRegister.Show();
         }
         /// <summary>
         /// 忘记密码链接点击事件
