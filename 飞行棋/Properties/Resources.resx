@@ -117,32 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxu5P8IceD/BW3k/wBDkP8CQpD/AEKN/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAApu5P9Ww/v/WMP8/1rD/P9XxPz/V8L8/1rD/P8CQpD/AAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdt5P+W5v//mOX//wBCj/8AQY//AkKQ/wBDjv9YxPr/VsP7/wFD
-        kf8AAAAAAAAAAAAAAAAAAAAAAAAAAApv4/+X5///muX//wFCjf+U5f//mOX//5bm//+W5f//AEKN/1jD
-        /P9Ww/v/AkGR/wAAAAAAAAAAAAAAAAAAAAAHbuP/mOX//5jl//+W5v3/mOT//5Xl/P+Y5f//kO///5fl
-        //+Y5Pv/V8T8/wJCkP8AAAAAAAAAAAAAAAAAQ5D/Cm/j/5jl//8HbeT/VKbQ/5jl//+W5v//muP//5Xl
-        /v8Jb+D/V6XQ/1fE/P8AQo//AEKR/wAAAAACQpD/WMT6/wlt4/9O0///mOb9/5bk//+b5v//lub//5fk
-        /v+X5v//mOX//5bm//9XxPz/AEKQ/1bD+/8CQpD/CW3j/631//8Ib+P/TtP//5jl//8AQ5D/mOX//5jl
-        //+Y5f//leX+/wBDkP+Y5P//V8P5/wBDkP+v9f//AEOO/wAAAAAIb+P/B23k/07R//+Y5f//mOX//5vl
-        //+V5v//mOT//5nk/v+V5f7/lub//1rD/P8AQ47/CW3k/wAAAAAAAAAAAAAAAAhw4f9N0v7/TdH//0rR
-        /f9O0v//T9L+/0vU+/9O0v//SdL//1DT//9M0P//A0KS/wAAAAAAAAAAAAAAAAAAAAAASzX/AU01/wNK
-        Of8BTDb/AEs2/wBNNf8ATTb/AE02/wJKNv8BTDb/AE43/wFNNf8ASzb/AE01/wAAAAAAAAAAC5R0/zPW
-        sP8v1q//MtWv/xPKnv8Ry53/DJZ0/xPKnv8BTDb/C5R0/wuXcv8ATTb/AAAAAAAAAAAAAAAAAAAAAAmX
-        dP8z167/ofT8/1v52/9X99n/M9aw/zTUsP8RzJv/Esqc/wyVdf8Nlnf/AU01/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAC5Z0/zDVsP8y1q3/MNew/zLVr/8x1rD/Esqc/xHMm/8OlnT/AEw1/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAANl3X/DJV1/wyVdf8MlnT/DZVz/w+Wdv8IlXT/C5V2/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA+B8AAPAPAADgBwAAwAMAAMADAACAAQAAAAAAAAAAAACAAQAAwAMAAMAAAADAAwAAwAMAAOAH
-        AADwDwAA//8AAA==
-</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="star_trails" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\star_trails.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login_bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login_bg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="face_bk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\face_bk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login_edit_bk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login_edit_bk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="single_online" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\single_online.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

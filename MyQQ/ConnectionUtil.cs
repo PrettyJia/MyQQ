@@ -34,6 +34,35 @@ namespace MyQQ
             }
             return result;
         }
-        public static int ExecuteScalar(string sql) { }
+        public object ExecuteScalar(string sql)
+        {
+            SqlConnection connection = null;
+            object result = null;
+            try
+            {
+                connection = new SqlConnection(connStr);
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
+                result = command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        //public SqlDataReader ExecuteReader(string sql)
+        //{
+
+        //}
     }
 }
