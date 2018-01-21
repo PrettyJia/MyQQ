@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrettyCommonControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,35 +16,34 @@ namespace 飞行棋
     {
         public FrmLogin()
         {
+            //防止闪烁
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+
             InitializeComponent();
-            DIY();
+            ControlUtils.ChangeToCircle(plFace);
         }
-        private void DIY()
-        {
-            //绘制圆形图片框
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(plFace.ClientRectangle);
-            Region region = new Region(gp);
-            plFace.Region = region;
-            
-        }
+        
         //登录按钮的点击事件
         private void pbLoginBtn_Click(object sender, EventArgs e)
         {
             if (CheckInput())
             {
+                FrmRooms rooms = FrmRooms.GetFrmRooms();
+                rooms.Show();
 
+                this.Visible = false;
             }
         }
         public bool CheckInput()
         {
             if (txtUserName.Text.Length==0)
             {
-                MessageBox.Show("输入用户名！");
+                UCMessageBox.Show("输入用户名！",this);
                 return false;
             }else if (txtPwd.Text.Length==0)
             {
-                MessageBox.Show("请输入密码！");
+                UCMessageBox.Show("输入用户名！", this);
                 return false;
             }
             return true;
@@ -53,23 +53,7 @@ namespace 飞行棋
 
         [DllImport("user32.dll")]
         public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int IParam);
-
-        private void FrmLogin_MouseDown(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void plShade_MouseDown(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void lblTitleBar_Click(object sender, EventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(base.Handle, 0x112, 0xf012, 0);
-        }
-
+        
         private void lblTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();

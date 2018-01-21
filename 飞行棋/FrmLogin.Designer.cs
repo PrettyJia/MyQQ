@@ -88,7 +88,6 @@
             this.plShade.Name = "plShade";
             this.plShade.Size = new System.Drawing.Size(298, 392);
             this.plShade.TabIndex = 20;
-            this.plShade.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plShade_MouseDown);
             // 
             // pbSingleOnline
             // 
@@ -205,7 +204,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.TransparencyKey = System.Drawing.SystemColors.Control;
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmLogin_MouseDown);
             this.plTransforBox.ResumeLayout(false);
             this.plTransfor.ResumeLayout(false);
             this.plShade.ResumeLayout(false);
