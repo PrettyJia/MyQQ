@@ -226,7 +226,7 @@ namespace 飞行棋
             main.roomId = roomId;
             main.seatId = ((PictureBox)sender).Tag.ToString().Split(',')[0] ;
             main.id = id;
-            main.Show();
+            main.Show(); 
         }
     }
 }

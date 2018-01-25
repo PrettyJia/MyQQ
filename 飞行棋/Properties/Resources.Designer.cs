@@ -2123,6 +2123,16 @@ namespace 飞行棋.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap qr_panel_close {
+            get {
+                object obj = ResourceManager.GetObject("qr_panel_close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Seat {
             get {
                 object obj = ResourceManager.GetObject("Seat", resourceCulture);

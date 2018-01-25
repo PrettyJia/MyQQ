@@ -15,7 +15,8 @@ namespace 飞行棋
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(FrmRooms.GetFrmRooms());
+            //Application.Run(FrmRooms.GetFrmRooms());
+            Application.Run(new FrmLogin());
         }
     }
 }

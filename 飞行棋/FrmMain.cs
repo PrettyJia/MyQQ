@@ -13,6 +13,9 @@ namespace 飞行棋
 {
     public partial class FrmMain : Form
     {
+        //为保证安全性，使用触发器
+        //规则一、房间所有玩家准备完毕，房间的状态改为开始
+        //规则二、当所有玩家进入终点，房间的状态为准备
         public string roomId = string.Empty;
         public string seatId=string.Empty;
         public string id = string.Empty;
@@ -34,14 +37,20 @@ namespace 飞行棋
         private void UpdateRoomInfo()
         {
             //为了安全，先检查后更新数据
-            if (CheckRoomState())
+            if (CheckRoomState()&&GetRoomPlayerCount()<4)
             {
                 //占座
                 if (SaveSeat())
                 {
-                    MessageBox.Show("占座成功！");
+                    UCMessageBox.Show("占座成功！",this);
+                }else
+                {
+                    UCMessageBox.Show("占座失败！别处游戏中", this);
                 }
-                
+
+            }else {
+                UCMessageBox.Show("人数已满或已经开始不能加入房间！",this);
+                this.Close();
             }
         }
         //
@@ -61,7 +70,7 @@ namespace 飞行棋
                 }
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -70,6 +79,35 @@ namespace 飞行棋
                 dbHelper.Connection.Close();
             }
         }
+        /// <summary>
+        /// 获取房间中玩家人数
+        /// </summary>
+        /// <returns></returns>
+        public int GetRoomPlayerCount()
+        {
+            string sql = "select COUNT(*) from RoomPlayer where rid="+roomId;
+            DBHelper dbHelper = new DBHelper();
+            int count = -1;
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                count=Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+            return count;
+        }
+        /// <summary>
+        /// 检查房间的状态为未开始
+        /// </summary>
+        /// <returns></returns>
         public bool CheckRoomState()
         {
             DBHelper dbHelper = new DBHelper();

@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tRefershen = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -51,11 +50,6 @@
             this.tRefershen.Enabled = true;
             this.tRefershen.Interval = 1000;
             this.tRefershen.Tick += new System.EventHandler(this.tRefershen_Tick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // FrmRooms
             // 
@@ -80,6 +74,5 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Timer tRefershen;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

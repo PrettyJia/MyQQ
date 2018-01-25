@@ -11,6 +11,10 @@ namespace 飞行棋
 {
     public partial class FrmRooms : Form
     {
+        /// <summary>
+        /// 登录的用户id
+        /// </summary>
+        public string id=string.Empty;
         private static FrmRooms frmRooms;
         public static FrmRooms GetFrmRooms()
         {
