@@ -31,6 +31,7 @@
             this.plTransforBox = new System.Windows.Forms.Panel();
             this.plTransfor = new System.Windows.Forms.Panel();
             this.plShade = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pbClose = new System.Windows.Forms.PictureBox();
             this.lblTitleBar = new System.Windows.Forms.Label();
             this.txtPwd = new System.Windows.Forms.TextBox();
@@ -42,17 +43,16 @@
             this.pbLoginBtn = new System.Windows.Forms.PictureBox();
             this.pbPwdBg = new System.Windows.Forms.PictureBox();
             this.pbUserNameBg = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.plTransforBox.SuspendLayout();
             this.plTransfor.SuspendLayout();
             this.plShade.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.plLoginBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPwdBg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserNameBg)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // plTransforBox
@@ -92,6 +92,14 @@
             this.plShade.Size = new System.Drawing.Size(298, 392);
             this.plShade.TabIndex = 20;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pbClose);
+            this.panel1.Location = new System.Drawing.Point(264, -2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(34, 30);
+            this.panel1.TabIndex = 29;
+            // 
             // pbClose
             // 
             this.pbClose.Image = global::飞行棋.Properties.Resources.qr_panel_close;
@@ -120,6 +128,7 @@
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(167, 14);
             this.txtPwd.TabIndex = 26;
+            this.txtPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPwd_KeyDown);
             // 
             // txtUserName
             // 
@@ -206,14 +215,6 @@
             this.pbUserNameBg.TabIndex = 18;
             this.pbUserNameBg.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pbClose);
-            this.panel1.Location = new System.Drawing.Point(264, -2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(34, 30);
-            this.panel1.TabIndex = 29;
-            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -232,6 +233,8 @@
             this.plTransfor.ResumeLayout(false);
             this.plShade.ResumeLayout(false);
             this.plShade.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.plLoginBox.ResumeLayout(false);
@@ -239,8 +242,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPwdBg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserNameBg)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

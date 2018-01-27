@@ -32,9 +32,8 @@ namespace 飞行棋
             {
                 if (CheckUser())
                 {
-                    FrmRooms rooms = FrmRooms.GetFrmRooms();
+                    FrmRooms rooms = FrmRooms.GetFrmRooms(txtUserName.Text.Trim());
                     rooms.Show();
-                    rooms.id = txtUserName.Text.Trim();
                     this.Visible = false;
                 }else
                 {
@@ -136,6 +135,18 @@ namespace 飞行棋
             finally
             {
                 dbHelper.Connection.Close();
+            }
+        }
+        /// <summary>
+        /// 按下回车键
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                pbLoginBtn_Click(sender, e);
             }
         }
     }

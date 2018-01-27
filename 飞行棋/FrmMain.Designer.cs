@@ -54,6 +54,7 @@
             this.lbl16 = new System.Windows.Forms.Label();
             this.lbl11 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblRandNum = new System.Windows.Forms.Label();
             this.lbl35 = new System.Windows.Forms.Label();
             this.lbl26 = new System.Windows.Forms.Label();
             this.lbl37 = new System.Windows.Forms.Label();
@@ -107,17 +108,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblPlayer4 = new System.Windows.Forms.Label();
+            this.tMoveFly = new System.Windows.Forms.Timer(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.lblPlayer1 = new System.Windows.Forms.Label();
+            this.lblPlayer4 = new System.Windows.Forms.Label();
             this.lblPlayer2 = new System.Windows.Forms.Label();
             this.lblPlayer3 = new System.Windows.Forms.Label();
-            this.tMoveFly = new System.Windows.Forms.Timer(this.components);
+            this.tShowRandNum = new System.Windows.Forms.Timer(this.components);
+            this.lblTime20 = new System.Windows.Forms.Label();
+            this.tTime20 = new System.Windows.Forms.Timer(this.components);
+            this.tRefreshRoom = new System.Windows.Forms.Timer(this.components);
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl65
             // 
             this.lbl65.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl65.Location = new System.Drawing.Point(485, 100);
+            this.lbl65.Location = new System.Drawing.Point(485, 69);
             this.lbl65.Margin = new System.Windows.Forms.Padding(1);
             this.lbl65.Name = "lbl65";
             this.lbl65.Size = new System.Drawing.Size(35, 35);
@@ -126,7 +136,7 @@
             // lbl15
             // 
             this.lbl15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl15.Location = new System.Drawing.Point(595, 358);
+            this.lbl15.Location = new System.Drawing.Point(595, 327);
             this.lbl15.Margin = new System.Windows.Forms.Padding(1);
             this.lbl15.Name = "lbl15";
             this.lbl15.Size = new System.Drawing.Size(35, 35);
@@ -135,7 +145,7 @@
             // lbl34
             // 
             this.lbl34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl34.Location = new System.Drawing.Point(484, 431);
+            this.lbl34.Location = new System.Drawing.Point(484, 400);
             this.lbl34.Margin = new System.Windows.Forms.Padding(1);
             this.lbl34.Name = "lbl34";
             this.lbl34.Size = new System.Drawing.Size(35, 35);
@@ -144,7 +154,7 @@
             // lbl47
             // 
             this.lbl47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl47.Location = new System.Drawing.Point(226, 358);
+            this.lbl47.Location = new System.Drawing.Point(226, 327);
             this.lbl47.Margin = new System.Windows.Forms.Padding(1);
             this.lbl47.Name = "lbl47";
             this.lbl47.Size = new System.Drawing.Size(35, 35);
@@ -153,7 +163,7 @@
             // lbl66
             // 
             this.lbl66.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl66.Location = new System.Drawing.Point(485, 137);
+            this.lbl66.Location = new System.Drawing.Point(485, 106);
             this.lbl66.Margin = new System.Windows.Forms.Padding(1);
             this.lbl66.Name = "lbl66";
             this.lbl66.Size = new System.Drawing.Size(35, 35);
@@ -162,7 +172,7 @@
             // lbl67
             // 
             this.lbl67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl67.Location = new System.Drawing.Point(485, 174);
+            this.lbl67.Location = new System.Drawing.Point(485, 143);
             this.lbl67.Margin = new System.Windows.Forms.Padding(1);
             this.lbl67.Name = "lbl67";
             this.lbl67.Size = new System.Drawing.Size(35, 35);
@@ -171,7 +181,7 @@
             // lbl68
             // 
             this.lbl68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl68.Location = new System.Drawing.Point(485, 211);
+            this.lbl68.Location = new System.Drawing.Point(485, 180);
             this.lbl68.Margin = new System.Windows.Forms.Padding(1);
             this.lbl68.Name = "lbl68";
             this.lbl68.Size = new System.Drawing.Size(35, 35);
@@ -180,7 +190,7 @@
             // lbl69
             // 
             this.lbl69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl69.Location = new System.Drawing.Point(485, 248);
+            this.lbl69.Location = new System.Drawing.Point(485, 217);
             this.lbl69.Margin = new System.Windows.Forms.Padding(1);
             this.lbl69.Name = "lbl69";
             this.lbl69.Size = new System.Drawing.Size(35, 35);
@@ -189,7 +199,7 @@
             // lbl70
             // 
             this.lbl70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl70.Location = new System.Drawing.Point(485, 285);
+            this.lbl70.Location = new System.Drawing.Point(485, 254);
             this.lbl70.Margin = new System.Windows.Forms.Padding(1);
             this.lbl70.Name = "lbl70";
             this.lbl70.Size = new System.Drawing.Size(35, 35);
@@ -198,7 +208,7 @@
             // lbl48
             // 
             this.lbl48.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl48.Location = new System.Drawing.Point(263, 358);
+            this.lbl48.Location = new System.Drawing.Point(263, 327);
             this.lbl48.Margin = new System.Windows.Forms.Padding(1);
             this.lbl48.Name = "lbl48";
             this.lbl48.Size = new System.Drawing.Size(35, 35);
@@ -207,7 +217,7 @@
             // lbl50
             // 
             this.lbl50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl50.Location = new System.Drawing.Point(337, 358);
+            this.lbl50.Location = new System.Drawing.Point(337, 327);
             this.lbl50.Margin = new System.Windows.Forms.Padding(1);
             this.lbl50.Name = "lbl50";
             this.lbl50.Size = new System.Drawing.Size(35, 35);
@@ -216,7 +226,7 @@
             // lbl49
             // 
             this.lbl49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl49.Location = new System.Drawing.Point(300, 358);
+            this.lbl49.Location = new System.Drawing.Point(300, 327);
             this.lbl49.Margin = new System.Windows.Forms.Padding(1);
             this.lbl49.Name = "lbl49";
             this.lbl49.Size = new System.Drawing.Size(35, 35);
@@ -225,7 +235,7 @@
             // lbl52
             // 
             this.lbl52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl52.Location = new System.Drawing.Point(412, 358);
+            this.lbl52.Location = new System.Drawing.Point(412, 327);
             this.lbl52.Margin = new System.Windows.Forms.Padding(1);
             this.lbl52.Name = "lbl52";
             this.lbl52.Size = new System.Drawing.Size(35, 35);
@@ -234,7 +244,7 @@
             // lbl51
             // 
             this.lbl51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl51.Location = new System.Drawing.Point(374, 358);
+            this.lbl51.Location = new System.Drawing.Point(374, 327);
             this.lbl51.Margin = new System.Windows.Forms.Padding(1);
             this.lbl51.Name = "lbl51";
             this.lbl51.Size = new System.Drawing.Size(35, 35);
@@ -243,7 +253,7 @@
             // lbl31
             // 
             this.lbl31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl31.Location = new System.Drawing.Point(484, 542);
+            this.lbl31.Location = new System.Drawing.Point(484, 511);
             this.lbl31.Margin = new System.Windows.Forms.Padding(1);
             this.lbl31.Name = "lbl31";
             this.lbl31.Size = new System.Drawing.Size(35, 35);
@@ -252,7 +262,7 @@
             // lbl29
             // 
             this.lbl29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl29.Location = new System.Drawing.Point(484, 616);
+            this.lbl29.Location = new System.Drawing.Point(484, 585);
             this.lbl29.Margin = new System.Windows.Forms.Padding(1);
             this.lbl29.Name = "lbl29";
             this.lbl29.Size = new System.Drawing.Size(35, 35);
@@ -261,7 +271,7 @@
             // lbl33
             // 
             this.lbl33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl33.Location = new System.Drawing.Point(484, 468);
+            this.lbl33.Location = new System.Drawing.Point(484, 437);
             this.lbl33.Margin = new System.Windows.Forms.Padding(1);
             this.lbl33.Name = "lbl33";
             this.lbl33.Size = new System.Drawing.Size(35, 35);
@@ -270,7 +280,7 @@
             // lbl32
             // 
             this.lbl32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl32.Location = new System.Drawing.Point(484, 505);
+            this.lbl32.Location = new System.Drawing.Point(484, 474);
             this.lbl32.Margin = new System.Windows.Forms.Padding(1);
             this.lbl32.Name = "lbl32";
             this.lbl32.Size = new System.Drawing.Size(35, 35);
@@ -279,7 +289,7 @@
             // lbl30
             // 
             this.lbl30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl30.Location = new System.Drawing.Point(484, 579);
+            this.lbl30.Location = new System.Drawing.Point(484, 548);
             this.lbl30.Margin = new System.Windows.Forms.Padding(1);
             this.lbl30.Name = "lbl30";
             this.lbl30.Size = new System.Drawing.Size(35, 35);
@@ -288,7 +298,7 @@
             // lbl14
             // 
             this.lbl14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl14.Location = new System.Drawing.Point(632, 358);
+            this.lbl14.Location = new System.Drawing.Point(632, 327);
             this.lbl14.Margin = new System.Windows.Forms.Padding(1);
             this.lbl14.Name = "lbl14";
             this.lbl14.Size = new System.Drawing.Size(35, 35);
@@ -297,7 +307,7 @@
             // lbl13
             // 
             this.lbl13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl13.Location = new System.Drawing.Point(669, 358);
+            this.lbl13.Location = new System.Drawing.Point(669, 327);
             this.lbl13.Margin = new System.Windows.Forms.Padding(1);
             this.lbl13.Name = "lbl13";
             this.lbl13.Size = new System.Drawing.Size(35, 35);
@@ -306,7 +316,7 @@
             // lbl12
             // 
             this.lbl12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl12.Location = new System.Drawing.Point(706, 358);
+            this.lbl12.Location = new System.Drawing.Point(706, 327);
             this.lbl12.Margin = new System.Windows.Forms.Padding(1);
             this.lbl12.Name = "lbl12";
             this.lbl12.Size = new System.Drawing.Size(35, 35);
@@ -315,7 +325,7 @@
             // lbl16
             // 
             this.lbl16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl16.Location = new System.Drawing.Point(558, 358);
+            this.lbl16.Location = new System.Drawing.Point(558, 327);
             this.lbl16.Margin = new System.Windows.Forms.Padding(1);
             this.lbl16.Name = "lbl16";
             this.lbl16.Size = new System.Drawing.Size(35, 35);
@@ -324,7 +334,7 @@
             // lbl11
             // 
             this.lbl11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl11.Location = new System.Drawing.Point(743, 358);
+            this.lbl11.Location = new System.Drawing.Point(743, 327);
             this.lbl11.Margin = new System.Windows.Forms.Padding(1);
             this.lbl11.Name = "lbl11";
             this.lbl11.Size = new System.Drawing.Size(35, 35);
@@ -333,15 +343,27 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.panel5.Location = new System.Drawing.Point(449, 321);
+            this.panel5.Controls.Add(this.lblRandNum);
+            this.panel5.Location = new System.Drawing.Point(449, 290);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(107, 109);
             this.panel5.TabIndex = 1;
             // 
+            // lblRandNum
+            // 
+            this.lblRandNum.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblRandNum.ForeColor = System.Drawing.Color.White;
+            this.lblRandNum.Location = new System.Drawing.Point(39, 27);
+            this.lblRandNum.Name = "lblRandNum";
+            this.lblRandNum.Size = new System.Drawing.Size(32, 55);
+            this.lblRandNum.TabIndex = 0;
+            this.lblRandNum.Text = "0";
+            this.lblRandNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lbl35
             // 
             this.lbl35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl35.Location = new System.Drawing.Point(447, 616);
+            this.lbl35.Location = new System.Drawing.Point(447, 585);
             this.lbl35.Margin = new System.Windows.Forms.Padding(1);
             this.lbl35.Name = "lbl35";
             this.lbl35.Size = new System.Drawing.Size(35, 35);
@@ -350,7 +372,7 @@
             // lbl26
             // 
             this.lbl26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl26.Location = new System.Drawing.Point(596, 616);
+            this.lbl26.Location = new System.Drawing.Point(596, 585);
             this.lbl26.Margin = new System.Windows.Forms.Padding(1);
             this.lbl26.Name = "lbl26";
             this.lbl26.Size = new System.Drawing.Size(35, 35);
@@ -359,7 +381,7 @@
             // lbl37
             // 
             this.lbl37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl37.Location = new System.Drawing.Point(373, 616);
+            this.lbl37.Location = new System.Drawing.Point(373, 585);
             this.lbl37.Margin = new System.Windows.Forms.Padding(1);
             this.lbl37.Name = "lbl37";
             this.lbl37.Size = new System.Drawing.Size(35, 35);
@@ -368,7 +390,7 @@
             // lbl62
             // 
             this.lbl62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl62.Location = new System.Drawing.Point(374, 100);
+            this.lbl62.Location = new System.Drawing.Point(374, 69);
             this.lbl62.Margin = new System.Windows.Forms.Padding(1);
             this.lbl62.Name = "lbl62";
             this.lbl62.Size = new System.Drawing.Size(35, 35);
@@ -377,7 +399,7 @@
             // lbl5
             // 
             this.lbl5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl5.Location = new System.Drawing.Point(632, 247);
+            this.lbl5.Location = new System.Drawing.Point(632, 216);
             this.lbl5.Margin = new System.Windows.Forms.Padding(1);
             this.lbl5.Name = "lbl5";
             this.lbl5.Size = new System.Drawing.Size(35, 35);
@@ -386,7 +408,7 @@
             // lbl22
             // 
             this.lbl22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl22.Location = new System.Drawing.Point(632, 469);
+            this.lbl22.Location = new System.Drawing.Point(632, 438);
             this.lbl22.Margin = new System.Windows.Forms.Padding(1);
             this.lbl22.Name = "lbl22";
             this.lbl22.Size = new System.Drawing.Size(35, 35);
@@ -395,7 +417,7 @@
             // lbl1
             // 
             this.lbl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl1.Location = new System.Drawing.Point(596, 100);
+            this.lbl1.Location = new System.Drawing.Point(596, 69);
             this.lbl1.Margin = new System.Windows.Forms.Padding(1);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(35, 35);
@@ -404,7 +426,7 @@
             // lbl9
             // 
             this.lbl9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl9.Location = new System.Drawing.Point(743, 284);
+            this.lbl9.Location = new System.Drawing.Point(743, 253);
             this.lbl9.Margin = new System.Windows.Forms.Padding(1);
             this.lbl9.Name = "lbl9";
             this.lbl9.Size = new System.Drawing.Size(35, 35);
@@ -413,7 +435,7 @@
             // lbl18
             // 
             this.lbl18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl18.Location = new System.Drawing.Point(743, 432);
+            this.lbl18.Location = new System.Drawing.Point(743, 401);
             this.lbl18.Margin = new System.Windows.Forms.Padding(1);
             this.lbl18.Name = "lbl18";
             this.lbl18.Size = new System.Drawing.Size(35, 35);
@@ -422,7 +444,7 @@
             // lbl20
             // 
             this.lbl20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl20.Location = new System.Drawing.Point(706, 469);
+            this.lbl20.Location = new System.Drawing.Point(706, 438);
             this.lbl20.Margin = new System.Windows.Forms.Padding(1);
             this.lbl20.Name = "lbl20";
             this.lbl20.Size = new System.Drawing.Size(35, 35);
@@ -431,7 +453,7 @@
             // lbl7
             // 
             this.lbl7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl7.Location = new System.Drawing.Point(706, 247);
+            this.lbl7.Location = new System.Drawing.Point(706, 216);
             this.lbl7.Margin = new System.Windows.Forms.Padding(1);
             this.lbl7.Name = "lbl7";
             this.lbl7.Size = new System.Drawing.Size(35, 35);
@@ -440,7 +462,7 @@
             // lbl3
             // 
             this.lbl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl3.Location = new System.Drawing.Point(596, 174);
+            this.lbl3.Location = new System.Drawing.Point(596, 143);
             this.lbl3.Margin = new System.Windows.Forms.Padding(1);
             this.lbl3.Name = "lbl3";
             this.lbl3.Size = new System.Drawing.Size(35, 35);
@@ -449,7 +471,7 @@
             // lbl71
             // 
             this.lbl71.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl71.Location = new System.Drawing.Point(522, 100);
+            this.lbl71.Location = new System.Drawing.Point(522, 69);
             this.lbl71.Margin = new System.Windows.Forms.Padding(1);
             this.lbl71.Name = "lbl71";
             this.lbl71.Size = new System.Drawing.Size(35, 35);
@@ -458,7 +480,7 @@
             // lbl19
             // 
             this.lbl19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl19.Location = new System.Drawing.Point(743, 469);
+            this.lbl19.Location = new System.Drawing.Point(743, 438);
             this.lbl19.Margin = new System.Windows.Forms.Padding(1);
             this.lbl19.Name = "lbl19";
             this.lbl19.Size = new System.Drawing.Size(35, 35);
@@ -467,7 +489,7 @@
             // lbl6
             // 
             this.lbl6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl6.Location = new System.Drawing.Point(669, 247);
+            this.lbl6.Location = new System.Drawing.Point(669, 216);
             this.lbl6.Margin = new System.Windows.Forms.Padding(1);
             this.lbl6.Name = "lbl6";
             this.lbl6.Size = new System.Drawing.Size(35, 35);
@@ -476,7 +498,7 @@
             // lbl10
             // 
             this.lbl10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl10.Location = new System.Drawing.Point(743, 321);
+            this.lbl10.Location = new System.Drawing.Point(743, 290);
             this.lbl10.Margin = new System.Windows.Forms.Padding(1);
             this.lbl10.Name = "lbl10";
             this.lbl10.Size = new System.Drawing.Size(35, 35);
@@ -485,7 +507,7 @@
             // lbl2
             // 
             this.lbl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl2.Location = new System.Drawing.Point(596, 137);
+            this.lbl2.Location = new System.Drawing.Point(596, 106);
             this.lbl2.Margin = new System.Windows.Forms.Padding(1);
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(35, 35);
@@ -494,7 +516,7 @@
             // lbl72
             // 
             this.lbl72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl72.Location = new System.Drawing.Point(559, 100);
+            this.lbl72.Location = new System.Drawing.Point(559, 69);
             this.lbl72.Margin = new System.Windows.Forms.Padding(1);
             this.lbl72.Name = "lbl72";
             this.lbl72.Size = new System.Drawing.Size(35, 35);
@@ -503,7 +525,7 @@
             // lbl21
             // 
             this.lbl21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl21.Location = new System.Drawing.Point(669, 469);
+            this.lbl21.Location = new System.Drawing.Point(669, 438);
             this.lbl21.Margin = new System.Windows.Forms.Padding(1);
             this.lbl21.Name = "lbl21";
             this.lbl21.Size = new System.Drawing.Size(35, 35);
@@ -512,7 +534,7 @@
             // lbl17
             // 
             this.lbl17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl17.Location = new System.Drawing.Point(743, 395);
+            this.lbl17.Location = new System.Drawing.Point(743, 364);
             this.lbl17.Margin = new System.Windows.Forms.Padding(1);
             this.lbl17.Name = "lbl17";
             this.lbl17.Size = new System.Drawing.Size(35, 35);
@@ -521,7 +543,7 @@
             // lbl4
             // 
             this.lbl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl4.Location = new System.Drawing.Point(596, 211);
+            this.lbl4.Location = new System.Drawing.Point(596, 180);
             this.lbl4.Margin = new System.Windows.Forms.Padding(1);
             this.lbl4.Name = "lbl4";
             this.lbl4.Size = new System.Drawing.Size(35, 35);
@@ -530,7 +552,7 @@
             // lbl8
             // 
             this.lbl8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl8.Location = new System.Drawing.Point(743, 247);
+            this.lbl8.Location = new System.Drawing.Point(743, 216);
             this.lbl8.Margin = new System.Windows.Forms.Padding(1);
             this.lbl8.Name = "lbl8";
             this.lbl8.Size = new System.Drawing.Size(35, 35);
@@ -539,7 +561,7 @@
             // lbl43
             // 
             this.lbl43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl43.Location = new System.Drawing.Point(263, 468);
+            this.lbl43.Location = new System.Drawing.Point(263, 437);
             this.lbl43.Margin = new System.Windows.Forms.Padding(1);
             this.lbl43.Name = "lbl43";
             this.lbl43.Size = new System.Drawing.Size(35, 35);
@@ -548,7 +570,7 @@
             // lbl60
             // 
             this.lbl60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl60.Location = new System.Drawing.Point(374, 174);
+            this.lbl60.Location = new System.Drawing.Point(374, 143);
             this.lbl60.Margin = new System.Windows.Forms.Padding(1);
             this.lbl60.Name = "lbl60";
             this.lbl60.Size = new System.Drawing.Size(35, 35);
@@ -557,7 +579,7 @@
             // lbl56
             // 
             this.lbl56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl56.Location = new System.Drawing.Point(263, 247);
+            this.lbl56.Location = new System.Drawing.Point(263, 216);
             this.lbl56.Margin = new System.Windows.Forms.Padding(1);
             this.lbl56.Name = "lbl56";
             this.lbl56.Size = new System.Drawing.Size(35, 35);
@@ -566,7 +588,7 @@
             // lbl64
             // 
             this.lbl64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl64.Location = new System.Drawing.Point(448, 100);
+            this.lbl64.Location = new System.Drawing.Point(448, 69);
             this.lbl64.Margin = new System.Windows.Forms.Padding(1);
             this.lbl64.Name = "lbl64";
             this.lbl64.Size = new System.Drawing.Size(35, 35);
@@ -575,7 +597,7 @@
             // lbl39
             // 
             this.lbl39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lbl39.Location = new System.Drawing.Point(373, 542);
+            this.lbl39.Location = new System.Drawing.Point(373, 511);
             this.lbl39.Margin = new System.Windows.Forms.Padding(1);
             this.lbl39.Name = "lbl39";
             this.lbl39.Size = new System.Drawing.Size(35, 35);
@@ -584,7 +606,7 @@
             // lbl42
             // 
             this.lbl42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl42.Location = new System.Drawing.Point(300, 468);
+            this.lbl42.Location = new System.Drawing.Point(300, 437);
             this.lbl42.Margin = new System.Windows.Forms.Padding(1);
             this.lbl42.Name = "lbl42";
             this.lbl42.Size = new System.Drawing.Size(35, 35);
@@ -593,7 +615,7 @@
             // lbl55
             // 
             this.lbl55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl55.Location = new System.Drawing.Point(226, 247);
+            this.lbl55.Location = new System.Drawing.Point(226, 216);
             this.lbl55.Margin = new System.Windows.Forms.Padding(1);
             this.lbl55.Name = "lbl55";
             this.lbl55.Size = new System.Drawing.Size(35, 35);
@@ -602,7 +624,7 @@
             // lbl46
             // 
             this.lbl46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl46.Location = new System.Drawing.Point(226, 395);
+            this.lbl46.Location = new System.Drawing.Point(226, 364);
             this.lbl46.Margin = new System.Windows.Forms.Padding(1);
             this.lbl46.Name = "lbl46";
             this.lbl46.Size = new System.Drawing.Size(35, 35);
@@ -611,7 +633,7 @@
             // lbl25
             // 
             this.lbl25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl25.Location = new System.Drawing.Point(596, 579);
+            this.lbl25.Location = new System.Drawing.Point(596, 548);
             this.lbl25.Margin = new System.Windows.Forms.Padding(1);
             this.lbl25.Name = "lbl25";
             this.lbl25.Size = new System.Drawing.Size(35, 35);
@@ -620,7 +642,7 @@
             // lbl38
             // 
             this.lbl38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl38.Location = new System.Drawing.Point(373, 579);
+            this.lbl38.Location = new System.Drawing.Point(373, 548);
             this.lbl38.Margin = new System.Windows.Forms.Padding(1);
             this.lbl38.Name = "lbl38";
             this.lbl38.Size = new System.Drawing.Size(35, 35);
@@ -629,7 +651,7 @@
             // lbl41
             // 
             this.lbl41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl41.Location = new System.Drawing.Point(337, 468);
+            this.lbl41.Location = new System.Drawing.Point(337, 437);
             this.lbl41.Margin = new System.Windows.Forms.Padding(1);
             this.lbl41.Name = "lbl41";
             this.lbl41.Size = new System.Drawing.Size(35, 35);
@@ -638,7 +660,7 @@
             // lbl24
             // 
             this.lbl24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl24.Location = new System.Drawing.Point(596, 542);
+            this.lbl24.Location = new System.Drawing.Point(596, 511);
             this.lbl24.Margin = new System.Windows.Forms.Padding(1);
             this.lbl24.Name = "lbl24";
             this.lbl24.Size = new System.Drawing.Size(35, 35);
@@ -647,7 +669,7 @@
             // lbl28
             // 
             this.lbl28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl28.Location = new System.Drawing.Point(521, 616);
+            this.lbl28.Location = new System.Drawing.Point(521, 585);
             this.lbl28.Margin = new System.Windows.Forms.Padding(1);
             this.lbl28.Name = "lbl28";
             this.lbl28.Size = new System.Drawing.Size(35, 35);
@@ -656,7 +678,7 @@
             // lbl54
             // 
             this.lbl54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl54.Location = new System.Drawing.Point(226, 284);
+            this.lbl54.Location = new System.Drawing.Point(226, 253);
             this.lbl54.Margin = new System.Windows.Forms.Padding(1);
             this.lbl54.Name = "lbl54";
             this.lbl54.Size = new System.Drawing.Size(35, 35);
@@ -665,7 +687,7 @@
             // lbl45
             // 
             this.lbl45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl45.Location = new System.Drawing.Point(226, 431);
+            this.lbl45.Location = new System.Drawing.Point(226, 400);
             this.lbl45.Margin = new System.Windows.Forms.Padding(1);
             this.lbl45.Name = "lbl45";
             this.lbl45.Size = new System.Drawing.Size(35, 35);
@@ -674,7 +696,7 @@
             // lbl44
             // 
             this.lbl44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl44.Location = new System.Drawing.Point(226, 468);
+            this.lbl44.Location = new System.Drawing.Point(226, 437);
             this.lbl44.Margin = new System.Windows.Forms.Padding(1);
             this.lbl44.Name = "lbl44";
             this.lbl44.Size = new System.Drawing.Size(35, 35);
@@ -683,7 +705,7 @@
             // lbl23
             // 
             this.lbl23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl23.Location = new System.Drawing.Point(596, 505);
+            this.lbl23.Location = new System.Drawing.Point(596, 474);
             this.lbl23.Margin = new System.Windows.Forms.Padding(1);
             this.lbl23.Name = "lbl23";
             this.lbl23.Size = new System.Drawing.Size(35, 35);
@@ -692,7 +714,7 @@
             // lbl36
             // 
             this.lbl36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl36.Location = new System.Drawing.Point(410, 616);
+            this.lbl36.Location = new System.Drawing.Point(410, 585);
             this.lbl36.Margin = new System.Windows.Forms.Padding(1);
             this.lbl36.Name = "lbl36";
             this.lbl36.Size = new System.Drawing.Size(35, 35);
@@ -701,7 +723,7 @@
             // lbl40
             // 
             this.lbl40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl40.Location = new System.Drawing.Point(373, 505);
+            this.lbl40.Location = new System.Drawing.Point(373, 474);
             this.lbl40.Margin = new System.Windows.Forms.Padding(1);
             this.lbl40.Name = "lbl40";
             this.lbl40.Size = new System.Drawing.Size(35, 35);
@@ -710,7 +732,7 @@
             // lbl61
             // 
             this.lbl61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl61.Location = new System.Drawing.Point(374, 137);
+            this.lbl61.Location = new System.Drawing.Point(374, 106);
             this.lbl61.Margin = new System.Windows.Forms.Padding(1);
             this.lbl61.Name = "lbl61";
             this.lbl61.Size = new System.Drawing.Size(35, 35);
@@ -719,7 +741,7 @@
             // lbl27
             // 
             this.lbl27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl27.Location = new System.Drawing.Point(558, 616);
+            this.lbl27.Location = new System.Drawing.Point(558, 585);
             this.lbl27.Margin = new System.Windows.Forms.Padding(1);
             this.lbl27.Name = "lbl27";
             this.lbl27.Size = new System.Drawing.Size(35, 35);
@@ -728,7 +750,7 @@
             // lbl57
             // 
             this.lbl57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl57.Location = new System.Drawing.Point(300, 247);
+            this.lbl57.Location = new System.Drawing.Point(300, 216);
             this.lbl57.Margin = new System.Windows.Forms.Padding(1);
             this.lbl57.Name = "lbl57";
             this.lbl57.Size = new System.Drawing.Size(35, 35);
@@ -737,7 +759,7 @@
             // lbl53
             // 
             this.lbl53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lbl53.Location = new System.Drawing.Point(226, 321);
+            this.lbl53.Location = new System.Drawing.Point(226, 290);
             this.lbl53.Margin = new System.Windows.Forms.Padding(1);
             this.lbl53.Name = "lbl53";
             this.lbl53.Size = new System.Drawing.Size(35, 35);
@@ -746,7 +768,7 @@
             // lbl58
             // 
             this.lbl58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lbl58.Location = new System.Drawing.Point(337, 247);
+            this.lbl58.Location = new System.Drawing.Point(337, 216);
             this.lbl58.Margin = new System.Windows.Forms.Padding(1);
             this.lbl58.Name = "lbl58";
             this.lbl58.Size = new System.Drawing.Size(35, 35);
@@ -755,7 +777,7 @@
             // lbl63
             // 
             this.lbl63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl63.Location = new System.Drawing.Point(411, 100);
+            this.lbl63.Location = new System.Drawing.Point(411, 69);
             this.lbl63.Margin = new System.Windows.Forms.Padding(1);
             this.lbl63.Name = "lbl63";
             this.lbl63.Size = new System.Drawing.Size(35, 35);
@@ -764,7 +786,7 @@
             // lbl59
             // 
             this.lbl59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lbl59.Location = new System.Drawing.Point(374, 211);
+            this.lbl59.Location = new System.Drawing.Point(374, 180);
             this.lbl59.Margin = new System.Windows.Forms.Padding(1);
             this.lbl59.Name = "lbl59";
             this.lbl59.Size = new System.Drawing.Size(35, 35);
@@ -772,18 +794,18 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(833, 664);
+            this.btnGo.Location = new System.Drawing.Point(841, 619);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 23);
+            this.btnGo.Size = new System.Drawing.Size(62, 56);
             this.btnGo.TabIndex = 80;
-            this.btnGo.Text = "走一个";
+            this.btnGo.Text = "掷骰子";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.label1.Location = new System.Drawing.Point(226, 100);
+            this.label1.Location = new System.Drawing.Point(226, 69);
             this.label1.Margin = new System.Windows.Forms.Padding(1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 100);
@@ -792,7 +814,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.label2.Location = new System.Drawing.Point(678, 100);
+            this.label2.Location = new System.Drawing.Point(678, 69);
             this.label2.Margin = new System.Windows.Forms.Padding(1);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 100);
@@ -801,7 +823,7 @@
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.label3.Location = new System.Drawing.Point(678, 551);
+            this.label3.Location = new System.Drawing.Point(678, 520);
             this.label3.Margin = new System.Windows.Forms.Padding(1);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 100);
@@ -810,66 +832,139 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.label4.Location = new System.Drawing.Point(226, 551);
+            this.label4.Location = new System.Drawing.Point(226, 520);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 100);
             this.label4.TabIndex = 84;
-            // 
-            // lblPlayer4
-            // 
-            this.lblPlayer4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
-            this.lblPlayer4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPlayer4.Location = new System.Drawing.Point(265, 137);
-            this.lblPlayer4.Margin = new System.Windows.Forms.Padding(1);
-            this.lblPlayer4.Name = "lblPlayer4";
-            this.lblPlayer4.Size = new System.Drawing.Size(25, 25);
-            this.lblPlayer4.TabIndex = 85;
-            // 
-            // lblPlayer1
-            // 
-            this.lblPlayer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(171)))), ((int)(((byte)(23)))));
-            this.lblPlayer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPlayer1.Location = new System.Drawing.Point(716, 137);
-            this.lblPlayer1.Margin = new System.Windows.Forms.Padding(1);
-            this.lblPlayer1.Name = "lblPlayer1";
-            this.lblPlayer1.Size = new System.Drawing.Size(25, 25);
-            this.lblPlayer1.TabIndex = 86;
-            // 
-            // lblPlayer2
-            // 
-            this.lblPlayer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(193)))), ((int)(((byte)(57)))));
-            this.lblPlayer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPlayer2.Location = new System.Drawing.Point(716, 589);
-            this.lblPlayer2.Margin = new System.Windows.Forms.Padding(1);
-            this.lblPlayer2.Name = "lblPlayer2";
-            this.lblPlayer2.Size = new System.Drawing.Size(25, 25);
-            this.lblPlayer2.TabIndex = 87;
-            // 
-            // lblPlayer3
-            // 
-            this.lblPlayer3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(185)))), ((int)(((byte)(226)))));
-            this.lblPlayer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPlayer3.Location = new System.Drawing.Point(265, 589);
-            this.lblPlayer3.Margin = new System.Windows.Forms.Padding(1);
-            this.lblPlayer3.Name = "lblPlayer3";
-            this.lblPlayer3.Size = new System.Drawing.Size(25, 25);
-            this.lblPlayer3.TabIndex = 88;
             // 
             // tMoveFly
             // 
             this.tMoveFly.Interval = 30;
             this.tMoveFly.Tick += new System.EventHandler(this.tMoveFly_Tick);
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Image = global::飞行棋.Properties.Resources.zhuanjiao2;
+            this.label5.Location = new System.Drawing.Point(596, 216);
+            this.label5.Margin = new System.Windows.Forms.Padding(1);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 35);
+            this.label5.TabIndex = 89;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Image = global::飞行棋.Properties.Resources.zhuanjiao3;
+            this.label6.Location = new System.Drawing.Point(596, 438);
+            this.label6.Margin = new System.Windows.Forms.Padding(1);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 35);
+            this.label6.TabIndex = 90;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Image = global::飞行棋.Properties.Resources.zhuanjiao4;
+            this.label7.Location = new System.Drawing.Point(373, 438);
+            this.label7.Margin = new System.Windows.Forms.Padding(1);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 35);
+            this.label7.TabIndex = 91;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Image = global::飞行棋.Properties.Resources.zhuanjiao1;
+            this.label8.Location = new System.Drawing.Point(373, 216);
+            this.label8.Margin = new System.Windows.Forms.Padding(1);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 35);
+            this.label8.TabIndex = 92;
+            // 
+            // lblPlayer1
+            // 
+            this.lblPlayer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(190)))), ((int)(((byte)(23)))));
+            this.lblPlayer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPlayer1.Location = new System.Drawing.Point(716, 106);
+            this.lblPlayer1.Margin = new System.Windows.Forms.Padding(1);
+            this.lblPlayer1.Name = "lblPlayer1";
+            this.lblPlayer1.Size = new System.Drawing.Size(25, 25);
+            this.lblPlayer1.TabIndex = 93;
+            // 
+            // lblPlayer4
+            // 
+            this.lblPlayer4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(106)))), ((int)(((byte)(62)))));
+            this.lblPlayer4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPlayer4.Location = new System.Drawing.Point(265, 105);
+            this.lblPlayer4.Margin = new System.Windows.Forms.Padding(1);
+            this.lblPlayer4.Name = "lblPlayer4";
+            this.lblPlayer4.Size = new System.Drawing.Size(25, 25);
+            this.lblPlayer4.TabIndex = 94;
+            // 
+            // lblPlayer2
+            // 
+            this.lblPlayer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(250)))), ((int)(((byte)(57)))));
+            this.lblPlayer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPlayer2.Location = new System.Drawing.Point(716, 558);
+            this.lblPlayer2.Margin = new System.Windows.Forms.Padding(1);
+            this.lblPlayer2.Name = "lblPlayer2";
+            this.lblPlayer2.Size = new System.Drawing.Size(25, 25);
+            this.lblPlayer2.TabIndex = 95;
+            // 
+            // lblPlayer3
+            // 
+            this.lblPlayer3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(200)))), ((int)(((byte)(250)))));
+            this.lblPlayer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPlayer3.Location = new System.Drawing.Point(265, 558);
+            this.lblPlayer3.Margin = new System.Windows.Forms.Padding(1);
+            this.lblPlayer3.Name = "lblPlayer3";
+            this.lblPlayer3.Size = new System.Drawing.Size(25, 25);
+            this.lblPlayer3.TabIndex = 96;
+            // 
+            // tShowRandNum
+            // 
+            this.tShowRandNum.Interval = 50;
+            this.tShowRandNum.Tick += new System.EventHandler(this.tShowRandNum_Tick);
+            // 
+            // lblTime20
+            // 
+            this.lblTime20.BackColor = System.Drawing.Color.Black;
+            this.lblTime20.Font = new System.Drawing.Font("微软雅黑", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTime20.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblTime20.Location = new System.Drawing.Point(448, 9);
+            this.lblTime20.Name = "lblTime20";
+            this.lblTime20.Size = new System.Drawing.Size(116, 41);
+            this.lblTime20.TabIndex = 97;
+            this.lblTime20.Tag = "20";
+            this.lblTime20.Text = "20";
+            this.lblTime20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tTime20
+            // 
+            this.tTime20.Interval = 1000;
+            this.tTime20.Tick += new System.EventHandler(this.tTime20_Tick);
+            // 
+            // tRefreshRoom
+            // 
+            this.tRefreshRoom.Enabled = true;
+            this.tRefreshRoom.Tick += new System.EventHandler(this.tRefreshRoom_Tick);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1008, 687);
+            this.Controls.Add(this.lblTime20);
             this.Controls.Add(this.lblPlayer3);
             this.Controls.Add(this.lblPlayer2);
-            this.Controls.Add(this.lblPlayer1);
             this.Controls.Add(this.lblPlayer4);
+            this.Controls.Add(this.lblPlayer1);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -949,11 +1044,13 @@
             this.Controls.Add(this.lbl15);
             this.Controls.Add(this.lbl65);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "飞行棋";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1037,10 +1134,19 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblPlayer4;
+        private System.Windows.Forms.Timer tMoveFly;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblPlayer1;
+        private System.Windows.Forms.Label lblPlayer4;
         private System.Windows.Forms.Label lblPlayer2;
         private System.Windows.Forms.Label lblPlayer3;
-        private System.Windows.Forms.Timer tMoveFly;
+        private System.Windows.Forms.Label lblRandNum;
+        private System.Windows.Forms.Timer tShowRandNum;
+        private System.Windows.Forms.Label lblTime20;
+        private System.Windows.Forms.Timer tTime20;
+        private System.Windows.Forms.Timer tRefreshRoom;
     }
 }

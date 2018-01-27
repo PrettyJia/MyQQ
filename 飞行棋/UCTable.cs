@@ -14,7 +14,7 @@ namespace 飞行棋
 {
     public partial class UCTable : UserControl
     {
-        public string id = "10007";//用户编号string.Empty
+        public string id =string.Empty;//用户编号string.Empty
         //房间编号
         public string roomId = string.Empty;
         private const string FORMAT_TABLENUM = "- {0} -";
@@ -107,11 +107,46 @@ namespace 飞行棋
                             pbPlay4.Tag = string.Format(pbPlay4.Tag.ToString(), uid);
                             break;
                     }
+                }else
+                {
+                    switch (seat)
+                    {
+                        case 1:
+                            lblPlay1Name.Text = "";
+                            lblPlay1Name.Visible = false;
+                            //通过头像名字获取对应的资源
+                            pbPlay1.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
+                            //头像变圆
+                            ControlUtils.ChangeToRect(pbPlay1);
+                            pbPlay1.Tag = "1,{0}";
+                            break;
+                        case 2:
+                            lblPlay2Name.Text = "";
+                            lblPlay2Name.Visible = false;
+                            pbPlay2.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
+                            ControlUtils.ChangeToRect(pbPlay2);
+                            pbPlay2.Tag = "2,{0}";
+                            break;
+                        case 3:
+                            lblPlay3Name.Text = "";
+                            lblPlay3Name.Visible = false;
+                            pbPlay3.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
+                            ControlUtils.ChangeToRect(pbPlay3);
+                            pbPlay3.Tag = "3,{0}";
+                            break;
+                        case 4:
+                            lblPlay4Name.Text = "";
+                            lblPlay4Name.Visible = false;
+                            pbPlay4.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
+                            ControlUtils.ChangeToRect(pbPlay4);
+                            pbPlay4.Tag = "4,{0}";
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                UCMessageBox.Show(ex.Message, FrmRooms.GetFrmRooms());
+                UCMessageBox.Show(ex.Message, FrmRooms.GetFrmRooms(id));
             }
             finally
             {
@@ -137,16 +172,22 @@ namespace 飞行棋
                 dbHelper.Connection.Open();
                 SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
                 reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                while (reader.Read())
+                for (int i = 1; i <= 4; i++)
                 {
-                    //将四个头像设置信息
-                    roomState = Convert.ToInt32(reader["rstate"]);
-                    int id =Convert.ToInt32(reader["id"]);
-                    int seat = Convert.ToInt32(reader["seat"]);
-                    int ustate = Convert.ToInt32(reader["ustate"]);
-                    GetPlayerData(id.ToString(), seat);
-                    
+                    if (reader.Read())
+                    {
+                        //将四个头像设置信息
+                        roomState = Convert.ToInt32(reader["rstate"]);
+                        int id = Convert.ToInt32(reader["id"]);
+                        int seat = Convert.ToInt32(reader["seat"]);
+                        int ustate = Convert.ToInt32(reader["ustate"]);
+                        GetPlayerData(id.ToString(), seat);
+                    }else
+                    {
+                        GetPlayerData(0.ToString(), i);
+                    }
                 }
+               
                 //0为可用，1为准备中，2为已经开始游戏
                 if (roomState == 0 || roomState == 1)
                 {
@@ -165,7 +206,7 @@ namespace 飞行棋
             }
             catch (Exception ex)
             {
-                UCMessageBox.Show(ex.Message,FrmRooms.GetFrmRooms());
+                UCMessageBox.Show(ex.Message,FrmRooms.GetFrmRooms(id));
             }
             finally
             {
@@ -224,7 +265,6 @@ namespace 飞行棋
             //进入房间-选座模式
             FrmMain main = new FrmMain();
             main.roomId = roomId;
-            main.seatId = ((PictureBox)sender).Tag.ToString().Split(',')[0] ;
             main.id = id;
             main.Show(); 
         }

@@ -16,16 +16,17 @@ namespace 飞行棋
         /// </summary>
         public string id=string.Empty;
         private static FrmRooms frmRooms;
-        public static FrmRooms GetFrmRooms()
+        public static FrmRooms GetFrmRooms(string id)
         {
             if (frmRooms==null)
             {
-                frmRooms = new FrmRooms();
+                frmRooms = new FrmRooms( id);
             }
             return frmRooms;
         }
-        private FrmRooms()
+        private FrmRooms(string id)
         {
+            this.id = id;
             InitializeComponent();
         }
         
@@ -45,6 +46,7 @@ namespace 飞行棋
             {
                 UCTable ucTable = new UCTable();
                 ucTable.Name = "ucTable"+i;
+                ucTable.id = id;
                 ucTable.SetTableNum(i + 1);
                 ucTable.ReferenceRoomData();
                 flowLayoutPanel1.Controls.Add(ucTable);

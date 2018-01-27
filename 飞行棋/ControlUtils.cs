@@ -22,5 +22,17 @@ namespace 飞行棋
             Region region = new Region(gp);
             control.Region = region;
         }
+        /// <summary>
+        /// 将控件变成方形
+        /// </summary>
+        /// <param name="control"></param>
+        public static void ChangeToRect(Control control)
+        {
+            //绘制圆形图片框
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddRectangle(control.ClientRectangle);
+            Region region = new Region(gp);
+            control.Region = region;
+        }
     }
 }
