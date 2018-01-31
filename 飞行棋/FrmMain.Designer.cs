@@ -121,7 +121,24 @@
             this.lblTime20 = new System.Windows.Forms.Label();
             this.tTime20 = new System.Windows.Forms.Timer(this.components);
             this.tRefreshRoom = new System.Windows.Forms.Timer(this.components);
+            this.btnReady = new System.Windows.Forms.Button();
+            this.lblPlayer4State = new System.Windows.Forms.Label();
+            this.lblPlayer1State = new System.Windows.Forms.Label();
+            this.lblPlayer2State = new System.Windows.Forms.Label();
+            this.lblPlayer3State = new System.Windows.Forms.Label();
+            this.lblPlay4Name = new System.Windows.Forms.Label();
+            this.lblPlay1Name = new System.Windows.Forms.Label();
+            this.lblPlay3Name = new System.Windows.Forms.Label();
+            this.pbPlay4 = new System.Windows.Forms.PictureBox();
+            this.pbPlay3 = new System.Windows.Forms.PictureBox();
+            this.pbPlay1 = new System.Windows.Forms.PictureBox();
+            this.lblPlay2Name = new System.Windows.Forms.Label();
+            this.pbPlay2 = new System.Windows.Forms.PictureBox();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay2)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl65
@@ -794,12 +811,15 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(841, 619);
+            this.btnGo.BackColor = System.Drawing.Color.MistyRose;
+            this.btnGo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGo.Location = new System.Drawing.Point(524, 631);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(62, 56);
             this.btnGo.TabIndex = 80;
             this.btnGo.Text = "掷骰子";
-            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.UseVisualStyleBackColor = false;
+            this.btnGo.Visible = false;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // label1
@@ -951,11 +971,161 @@
             this.tRefreshRoom.Enabled = true;
             this.tRefreshRoom.Tick += new System.EventHandler(this.tRefreshRoom_Tick);
             // 
+            // btnReady
+            // 
+            this.btnReady.BackColor = System.Drawing.Color.Khaki;
+            this.btnReady.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnReady.Location = new System.Drawing.Point(414, 631);
+            this.btnReady.Name = "btnReady";
+            this.btnReady.Size = new System.Drawing.Size(62, 56);
+            this.btnReady.TabIndex = 98;
+            this.btnReady.Text = "准备好了";
+            this.btnReady.UseVisualStyleBackColor = false;
+            this.btnReady.Visible = false;
+            this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
+            // 
+            // lblPlayer4State
+            // 
+            this.lblPlayer4State.AutoSize = true;
+            this.lblPlayer4State.Location = new System.Drawing.Point(263, 38);
+            this.lblPlayer4State.Name = "lblPlayer4State";
+            this.lblPlayer4State.Size = new System.Drawing.Size(0, 12);
+            this.lblPlayer4State.TabIndex = 99;
+            // 
+            // lblPlayer1State
+            // 
+            this.lblPlayer1State.AutoSize = true;
+            this.lblPlayer1State.Location = new System.Drawing.Point(706, 38);
+            this.lblPlayer1State.Name = "lblPlayer1State";
+            this.lblPlayer1State.Size = new System.Drawing.Size(0, 12);
+            this.lblPlayer1State.TabIndex = 100;
+            // 
+            // lblPlayer2State
+            // 
+            this.lblPlayer2State.AutoSize = true;
+            this.lblPlayer2State.Location = new System.Drawing.Point(700, 497);
+            this.lblPlayer2State.Name = "lblPlayer2State";
+            this.lblPlayer2State.Size = new System.Drawing.Size(0, 12);
+            this.lblPlayer2State.TabIndex = 101;
+            // 
+            // lblPlayer3State
+            // 
+            this.lblPlayer3State.AutoSize = true;
+            this.lblPlayer3State.Location = new System.Drawing.Point(257, 497);
+            this.lblPlayer3State.Name = "lblPlayer3State";
+            this.lblPlayer3State.Size = new System.Drawing.Size(0, 12);
+            this.lblPlayer3State.TabIndex = 102;
+            // 
+            // lblPlay4Name
+            // 
+            this.lblPlay4Name.AutoSize = true;
+            this.lblPlay4Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay4Name.Location = new System.Drawing.Point(145, 94);
+            this.lblPlay4Name.Name = "lblPlay4Name";
+            this.lblPlay4Name.Size = new System.Drawing.Size(41, 12);
+            this.lblPlay4Name.TabIndex = 110;
+            this.lblPlay4Name.Text = "label1";
+            this.lblPlay4Name.Visible = false;
+            // 
+            // lblPlay1Name
+            // 
+            this.lblPlay1Name.AutoSize = true;
+            this.lblPlay1Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay1Name.Location = new System.Drawing.Point(867, 94);
+            this.lblPlay1Name.Name = "lblPlay1Name";
+            this.lblPlay1Name.Size = new System.Drawing.Size(41, 12);
+            this.lblPlay1Name.TabIndex = 109;
+            this.lblPlay1Name.Text = "label1";
+            this.lblPlay1Name.Visible = false;
+            // 
+            // lblPlay3Name
+            // 
+            this.lblPlay3Name.AutoSize = true;
+            this.lblPlay3Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay3Name.Location = new System.Drawing.Point(159, 547);
+            this.lblPlay3Name.Name = "lblPlay3Name";
+            this.lblPlay3Name.Size = new System.Drawing.Size(41, 12);
+            this.lblPlay3Name.TabIndex = 107;
+            this.lblPlay3Name.Text = "label1";
+            this.lblPlay3Name.Visible = false;
+            // 
+            // pbPlay4
+            // 
+            this.pbPlay4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbPlay4.Image = global::飞行棋.Properties.Resources.Seat;
+            this.pbPlay4.Location = new System.Drawing.Point(147, 109);
+            this.pbPlay4.Name = "pbPlay4";
+            this.pbPlay4.Size = new System.Drawing.Size(32, 32);
+            this.pbPlay4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbPlay4.TabIndex = 106;
+            this.pbPlay4.TabStop = false;
+            this.pbPlay4.Tag = "4,{0}";
+            // 
+            // pbPlay3
+            // 
+            this.pbPlay3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbPlay3.Image = global::飞行棋.Properties.Resources.Seat;
+            this.pbPlay3.Location = new System.Drawing.Point(161, 570);
+            this.pbPlay3.Name = "pbPlay3";
+            this.pbPlay3.Size = new System.Drawing.Size(32, 32);
+            this.pbPlay3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbPlay3.TabIndex = 104;
+            this.pbPlay3.TabStop = false;
+            this.pbPlay3.Tag = "3,{0}";
+            // 
+            // pbPlay1
+            // 
+            this.pbPlay1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbPlay1.Image = global::飞行棋.Properties.Resources.Seat;
+            this.pbPlay1.Location = new System.Drawing.Point(869, 109);
+            this.pbPlay1.Name = "pbPlay1";
+            this.pbPlay1.Size = new System.Drawing.Size(32, 32);
+            this.pbPlay1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbPlay1.TabIndex = 103;
+            this.pbPlay1.TabStop = false;
+            this.pbPlay1.Tag = "1,{0}";
+            // 
+            // lblPlay2Name
+            // 
+            this.lblPlay2Name.AutoSize = true;
+            this.lblPlay2Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay2Name.Location = new System.Drawing.Point(841, 552);
+            this.lblPlay2Name.Name = "lblPlay2Name";
+            this.lblPlay2Name.Size = new System.Drawing.Size(41, 12);
+            this.lblPlay2Name.TabIndex = 112;
+            this.lblPlay2Name.Text = "label1";
+            this.lblPlay2Name.Visible = false;
+            // 
+            // pbPlay2
+            // 
+            this.pbPlay2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbPlay2.Image = global::飞行棋.Properties.Resources.Seat;
+            this.pbPlay2.Location = new System.Drawing.Point(843, 570);
+            this.pbPlay2.Name = "pbPlay2";
+            this.pbPlay2.Size = new System.Drawing.Size(32, 32);
+            this.pbPlay2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbPlay2.TabIndex = 111;
+            this.pbPlay2.TabStop = false;
+            this.pbPlay2.Tag = "2,{0}";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 687);
+            this.ClientSize = new System.Drawing.Size(1008, 696);
+            this.Controls.Add(this.lblPlay2Name);
+            this.Controls.Add(this.pbPlay2);
+            this.Controls.Add(this.lblPlay4Name);
+            this.Controls.Add(this.lblPlay1Name);
+            this.Controls.Add(this.lblPlay3Name);
+            this.Controls.Add(this.pbPlay4);
+            this.Controls.Add(this.pbPlay3);
+            this.Controls.Add(this.pbPlay1);
+            this.Controls.Add(this.lblPlayer3State);
+            this.Controls.Add(this.lblPlayer2State);
+            this.Controls.Add(this.lblPlayer1State);
+            this.Controls.Add(this.lblPlayer4State);
+            this.Controls.Add(this.btnReady);
             this.Controls.Add(this.lblTime20);
             this.Controls.Add(this.lblPlayer3);
             this.Controls.Add(this.lblPlayer2);
@@ -1051,7 +1221,12 @@
             this.Text = "飞行棋";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlay2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1148,5 +1323,18 @@
         private System.Windows.Forms.Label lblTime20;
         private System.Windows.Forms.Timer tTime20;
         private System.Windows.Forms.Timer tRefreshRoom;
+        private System.Windows.Forms.Button btnReady;
+        private System.Windows.Forms.Label lblPlayer4State;
+        private System.Windows.Forms.Label lblPlayer1State;
+        private System.Windows.Forms.Label lblPlayer2State;
+        private System.Windows.Forms.Label lblPlayer3State;
+        private System.Windows.Forms.Label lblPlay4Name;
+        private System.Windows.Forms.Label lblPlay1Name;
+        private System.Windows.Forms.Label lblPlay3Name;
+        private System.Windows.Forms.PictureBox pbPlay4;
+        private System.Windows.Forms.PictureBox pbPlay3;
+        private System.Windows.Forms.PictureBox pbPlay1;
+        private System.Windows.Forms.Label lblPlay2Name;
+        private System.Windows.Forms.PictureBox pbPlay2;
     }
 }

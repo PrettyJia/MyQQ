@@ -32,6 +32,8 @@ namespace 飞行棋
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.Text = "房间：" + roomId;
+            //默认掷骰子按钮禁用
+            this.btnGo.Visible = false;
             //更新房间状态及信息
             UpdateRoomInfo();
             InitialRandShowNum();
@@ -69,7 +71,7 @@ namespace 飞行棋
                 else
                 {
                     UCMessageBox.Show("占座失败！别处游戏中", this);
-                    // this.Close();
+                    this.Close();
                 }
             }
             else
@@ -84,18 +86,23 @@ namespace 飞行棋
         /// <returns></returns>
         private bool IsNowRoom()
         {
-            string sql = "select rid from RoomPlayer where id="+id;
+            string sql = "select rid,seat from RoomPlayer where id=" + id;
             DBHelper dbHelper = new DBHelper();
+            SqlDataReader reader = null;
             try
             {
                 dbHelper.Connection.Open();
                 SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
-                int rid=Convert.ToInt32(command.ExecuteScalar());
-                if (rid.ToString()==roomId)
+                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                if (reader.Read())
                 {
-                    return true;
+                    string rid = reader["rid"].ToString();
+                    if (rid == roomId || rid == "0")
+                    {
+                        seatId = reader["seat"].ToString();
+                        return true;
+                    }
                 }
-
             }
             catch (Exception ex)
             {
@@ -103,7 +110,10 @@ namespace 飞行棋
             }
             finally
             {
-                dbHelper.Connection.Close();
+                if (reader != null)
+                {
+                    reader.Close();
+                }
             }
             return false;
         }
@@ -193,10 +203,16 @@ namespace 飞行棋
                 dbHelper.Connection.Open();
                 SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
                 reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                int i = 0;
-                while (reader.Read())
+                for (int i = 0; i < seats.Length; i++)
                 {
-                    seats[i] = Convert.ToInt32(reader["seat"]);
+                    if (reader.Read())
+                    {
+                        seats[i] = Convert.ToInt32(reader["seat"]);
+                    }
+                    else
+                    {
+                        seats[i] = 0;
+                    }
                 }
             }
             catch (Exception)
@@ -281,8 +297,6 @@ namespace 飞行棋
             tRefreshRoom.Stop();//动画开始的时候停止刷新数据
             randShowNum[randShowNum.Length - 1] = step;
             tShowRandNum.Start();
-            tTime20.Start();
-
         }
         /// <summary>
         /// 移动飞机
@@ -471,19 +485,43 @@ namespace 飞行棋
             }
         }
         /// <summary>
-        /// 刷新房间里的走步数据
+        /// 刷新房间里的数据
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tRefreshRoom_Tick(object sender, EventArgs e)
         {
             //房间信息刷新逻辑
-            //1.获取上次走步
-            string sql = "select top 1 std,num,seat from RoomState order by cdate desc";
+            //无论如何刷新房间头像信息
+            RefreshRoomPlayerInfo();
+            //房间是否已经进入游戏状态
+            //没有，判断所有玩家是否全部准备好
+            //如果都准备好，将房间状态修改
+            //如果进入游戏状态，开始游戏-
+            if (GetRoomState() != true)
+            {
+                if (AllPlayerReady())
+                {
+                    UpdateRoomToStart();
+                }
+            }
+            else
+            {
+                Gameing();
+            }
 
-            int std = -1;//状态序号
-            int num = -1;//骰子点数
-            int seat = -1;//座位号
+        }
+        /// <summary>
+        /// 刷新房间内玩家头像信息
+        /// </summary>
+        private void RefreshRoomPlayerInfo()
+        {
+            pbPlay1.Tag = "1,{0}";
+            pbPlay2.Tag = "2,{0}";
+            pbPlay3.Tag = "3,{0}";
+            pbPlay4.Tag = "4,{0}";
+            //查询房间内所有玩家
+            string sql = "select id,seat,state from RoomPlayer where rid=" + roomId;
             DBHelper dbHelper = new DBHelper();
             SqlDataReader reader = null;
             try
@@ -491,14 +529,19 @@ namespace 飞行棋
                 dbHelper.Connection.Open();
                 SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
                 reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                while (reader.Read())
+                for (int i = 1; i <= 4; i++)
                 {
-                    std = Convert.ToInt32(reader["std"]);
-                    num = Convert.ToInt32(reader["num"]);
-                    seat = Convert.ToInt32(reader["seat"]);
+                    if (reader.Read())
+                    {
+                        int uid = Convert.ToInt32(reader["id"]);
+                        int seat = Convert.ToInt32(reader["seat"]);
+                        int state = Convert.ToInt32(reader["state"]);
+                        GetPlayerInfo(uid, seat, state);
+                    }
                 }
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
             finally
@@ -508,31 +551,367 @@ namespace 飞行棋
                     reader.Close();
                 }
             }
-            //判断是哪个玩家掷骰子,展示移动效果
-            if (num != 6)
+            //设置没有座位的
+            for (int i = 1; i <= 4; i++)
             {
-                switch (seat)
+                //lblPlayer1State
+                Control pbcontrol = this.Controls.Find("pbPlay" + i, true)[0];
+                Label lblControl = Controls.Find("lblPlayer" + i + "State", true)[0] as Label;
+                //判断没有座位
+                if (pbcontrol.Tag.ToString() == (i + ",{0}"))
                 {
-                    case 1:
-                        willMoveControl = lblPlayer1;
-                        break;
-                    case 2:
-                        willMoveControl = lblPlayer1;
-                        break;
-                    case 3:
-                        willMoveControl = lblPlayer1;
-                        break;
-                    case 4:
-                        willMoveControl = lblPlayer1;
-                        break;
+                    ControlUtils.ChangeToRect(pbcontrol);
+                    lblControl.Text ="";
+                    (pbcontrol as PictureBox).Image = Properties.Resources.Seat;
                 }
-                Go(num);
+                else
+                {
+                    ControlUtils.ChangeToCircle(pbcontrol);
+                    //获取对应座位的玩家
+                    int uid =Convert.ToInt32(pbcontrol.Tag.ToString().Split(',')[1]);
+                    //有座位的判断准备状态
+                    if (!GetUserReaday(uid))
+                    {
+                        lblControl.Text ="";
+                        lblControl.Visible = false;
+                        if (seatId == i.ToString())
+                        {
+                            this.btnReady.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        //判断自己是否已经准备
+                        if (seatId==i.ToString())
+                        {
+                            this.btnReady.Visible = false;
+                        }
+                        lblControl.Text = "已准备";
+                        lblControl.Visible = true;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 获取玩家是否已经准备完毕
+        /// </summary>
+        /// <param name="id">用户id</param>
+        /// <returns></returns>
+        private bool GetUserReaday(int uid)
+        {
+            string sql = "select state from RoomPlayer where id=" + uid;
+            bool isReady = false;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                int result = Convert.ToInt32(command.ExecuteScalar());
+                if (result==1)
+                {
+                    isReady = true;
+                }
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+            return isReady;
+        }
+
+        /// <summary>
+        /// 获取具体的玩家信息
+        /// </summary>
+        /// <param name="id">玩家id</param>
+        /// <param name="seat">玩家座位号</param>
+        /// <param name="state">玩家状态</param>
+        private void GetPlayerInfo(int id, int seat, int state)
+        {
+            //获取头像编号
+            string sql = "select face from Users where id=" + id;
+            string face = string.Empty;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                face = command.ExecuteScalar().ToString();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+
+            switch (seat)
+            {
+                case 1:
+                    pbPlay1.Tag = string.Format(pbPlay1.Tag.ToString(), id);
+                    pbPlay1.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                    break;
+                case 2:
+                    pbPlay2.Tag = string.Format(pbPlay2.Tag.ToString(), id);
+                    pbPlay2.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                    break;
+                case 3:
+                    pbPlay3.Tag = string.Format(pbPlay3.Tag.ToString(), id);
+                    pbPlay3.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                    break;
+                case 4:
+                    pbPlay4.Tag = string.Format(pbPlay4.Tag.ToString(), id);
+                    pbPlay4.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                    break;
+            }
+           
+        }
+        /// <summary>
+        /// 更改房间状态为游戏中
+        /// </summary>
+        private void UpdateRoomToStart()
+        {
+            string sql = "update Rooms set state=1 where rid=" + roomId;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取房间状态是否开始
+        /// </summary>
+        /// <returns></returns>
+        private bool GetRoomState()
+        {
+            string sql = "select state from Rooms where rid=" + roomId;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                int state = Convert.ToInt32(command.ExecuteScalar());
+                if (state == 1)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+            return false;
+        }
+
+        private void Gameing()
+        {
+            if (GetPlayCount() == 0)
+            {
+                //判断是否是第一次掷骰子，如果是从第一个开始投
+                //各自判断是否是第一个位
+                if (seatId == "1")
+                {
+                    //倒计时
+                    //更新位置
+                }
             }
             else
             {
-                //如果点数为6，玩家是否是当前玩家
+                //如果不是第一次掷骰子，获取上次走步数据
+                //如果是当前用户，进入掷骰子流程
+                //不是当前用户，则刷新走步数据
+                //1.获取上次走步
+                string sql = "select top 1 std,num,seat from RoomState order by cdate desc";
+                int std = -1;//状态序号
+                int num = -1;//骰子点数
+                int seat = -1;//座位号
+                DBHelper dbHelper = new DBHelper();
+                SqlDataReader reader = null;
+                try
+                {
+                    dbHelper.Connection.Open();
+                    SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                    reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (reader.Read())
+                    {
+                        std = Convert.ToInt32(reader["std"]);
+                        num = Convert.ToInt32(reader["num"]);
+                        seat = Convert.ToInt32(reader["seat"]);
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                finally
+                {
+                    if (reader != null)
+                    {
+                        reader.Close();
+                    }
+                }
+                //判断是哪个玩家掷骰子,展示移动效果
+                //if (num != 6)
+                //{
+
+                //}
+                //else
+                //{
+                //    //如果点数为6，玩家是否是当前玩家
+                //}
+                //判断是否是当前玩家走步，是则该玩家走步，否则刷新其他玩家走步
+                //开始倒计时
+                tShowRandNum.Start();
+                if (seat.ToString() == seatId)
+                {
+                    btnGo.Enabled = true;
+                    tRefreshRoom.Stop();//暂停刷新数据
+                }
+                else
+                {
+
+                    switch (seat)
+                    {
+                        case 1:
+                            willMoveControl = lblPlayer1;
+                            break;
+                        case 2:
+                            willMoveControl = lblPlayer1;
+                            break;
+                        case 3:
+                            willMoveControl = lblPlayer1;
+                            break;
+                        case 4:
+                            willMoveControl = lblPlayer1;
+                            break;
+                    }
+                    Go(num);
+                }
             }
-            //2.判断是否是当前玩家走步，是则该玩家走步，否则刷新其他玩家走步
+        }
+
+        /// <summary>
+        /// 获取房间掷骰子的次数
+        /// </summary>
+        /// <returns></returns>
+        private int GetPlayCount()
+        {
+            string sql = "select count(*) from RoomPlayer where rid=" + roomId;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                int count = Convert.ToInt32(command.ExecuteScalar());
+                return count;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+        }
+        /// <summary>
+        /// 所有玩家是否都准备
+        /// </summary>
+        /// <returns></returns>
+        private bool AllPlayerReady()
+        {
+            bool ready = true;
+            //查询准备好的人数
+            string sql = string.Format("select seat,state from RoomPlayer where rid={0}", roomId);
+            DBHelper dbHelper = new DBHelper();
+            SqlDataReader reader = null;
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read())
+                {
+                    int seat = Convert.ToInt32(reader["seat"]);
+                    int state = Convert.ToInt32(reader["state"]);
+                    if (state == 0)
+                    {
+                        ready = false;
+                    }
+                    else
+                    {
+                        switch (seat)
+                        {
+                            case 1:
+                                lblPlayer1State.Text = "已准备";
+                                break;
+                            case 2:
+                                lblPlayer2State.Text = "已准备";
+                                break;
+                            case 3:
+                                lblPlayer3State.Text = "已准备";
+                                break;
+                            case 4:
+                                lblPlayer4State.Text = "已准备";
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+            return ready;
+        }
+
+        /// <summary>
+        /// 确定准备好了
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnReady_Click(object sender, EventArgs e)
+        {
+            string sql = "update RoomPlayer set state=1 where id=" + id;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
+                int result = command.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    this.btnReady.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+
         }
     }
 }

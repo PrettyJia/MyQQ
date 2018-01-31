@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing.Drawing2D;
 using PrettyCommonControl;
+using System.Collections;
 
 namespace 飞行棋
 {
@@ -84,6 +85,7 @@ namespace 飞行棋
                             //头像变圆
                             ControlUtils.ChangeToCircle(pbPlay1);
                             pbPlay1.Tag = string.Format(pbPlay1.Tag.ToString(), uid);
+                            pbPlay1.Cursor = Cursors.Hand;
                             break;
                         case 2:
                             lblPlay2Name.Text = name;
@@ -91,6 +93,7 @@ namespace 飞行棋
                             pbPlay2.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
                             ControlUtils.ChangeToCircle(pbPlay2);
                             pbPlay2.Tag = string.Format(pbPlay2.Tag.ToString(), uid);
+                            pbPlay2.Cursor = Cursors.Hand;
                             break;
                         case 3:
                             lblPlay3Name.Text = name;
@@ -98,6 +101,7 @@ namespace 飞行棋
                             pbPlay3.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
                             ControlUtils.ChangeToCircle(pbPlay3);
                             pbPlay3.Tag = string.Format(pbPlay3.Tag.ToString(), uid);
+                            pbPlay3.Cursor = Cursors.Hand;
                             break;
                         case 4:
                             lblPlay4Name.Text = name;
@@ -105,6 +109,7 @@ namespace 飞行棋
                             pbPlay4.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
                             ControlUtils.ChangeToCircle(pbPlay4);
                             pbPlay4.Tag = string.Format(pbPlay4.Tag.ToString(), uid);
+                            pbPlay4.Cursor = Cursors.Hand;
                             break;
                     }
                 }else
@@ -116,9 +121,16 @@ namespace 飞行棋
                             lblPlay1Name.Visible = false;
                             //通过头像名字获取对应的资源
                             pbPlay1.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
-                            //头像变圆
+                            //头像变方
                             ControlUtils.ChangeToRect(pbPlay1);
                             pbPlay1.Tag = "1,{0}";
+                            if (roomState==1)
+                            {
+                                pbPlay1.Cursor = Cursors.No;
+                            }else
+                            {
+                                pbPlay1.Cursor = Cursors.Hand;
+                            }
                             break;
                         case 2:
                             lblPlay2Name.Text = "";
@@ -126,6 +138,14 @@ namespace 飞行棋
                             pbPlay2.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
                             ControlUtils.ChangeToRect(pbPlay2);
                             pbPlay2.Tag = "2,{0}";
+                            if (roomState == 1)
+                            {
+                                pbPlay2.Cursor = Cursors.No;
+                            }else
+                            {
+                                pbPlay2.Cursor = Cursors.Hand;
+
+                            }
                             break;
                         case 3:
                             lblPlay3Name.Text = "";
@@ -133,6 +153,13 @@ namespace 飞行棋
                             pbPlay3.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
                             ControlUtils.ChangeToRect(pbPlay3);
                             pbPlay3.Tag = "3,{0}";
+                            if (roomState == 1)
+                            {
+                                pbPlay3.Cursor = Cursors.No;
+                            }else
+                            {
+                                pbPlay3.Cursor = Cursors.Hand;
+                            }
                             break;
                         case 4:
                             lblPlay4Name.Text = "";
@@ -140,6 +167,13 @@ namespace 飞行棋
                             pbPlay4.Image = Properties.Resources.ResourceManager.GetObject("Seat") as Image;
                             ControlUtils.ChangeToRect(pbPlay4);
                             pbPlay4.Tag = "4,{0}";
+                            if (roomState == 1)
+                            {
+                                pbPlay4.Cursor = Cursors.No;
+                            }else
+                            {
+                                pbPlay4.Cursor = Cursors.Hand;
+                            }
                             break;
                     }
                 }
@@ -160,6 +194,11 @@ namespace 飞行棋
         //获取房间数据
         private void GetRoomData()
         {
+            //重置座位数据，用于标记
+            pbPlay1.Tag = "1,{0}";
+            pbPlay2.Tag = "2,{0}";
+            pbPlay3.Tag = "3,{0}";
+            pbPlay4.Tag = "4,{0}";
             string sql = string.Format(@"select Rooms.state as rstate,id,seat,
             RoomPlayer.state ustate
             from Rooms
@@ -182,22 +221,27 @@ namespace 飞行棋
                         int seat = Convert.ToInt32(reader["seat"]);
                         int ustate = Convert.ToInt32(reader["ustate"]);
                         GetPlayerData(id.ToString(), seat);
-                    }else
+                    }
+                    //GetPlayerData(0.ToString(), tempNum);
+                }
+                //遍历所有座位，得到没有上座的座位
+                for (int i = 1; i <=4; i++)
+                {
+                    Control item=this.Controls.Find("pbPlay" + i, true)[0];
+                    //座位信息
+                    string[] info = item.Tag.ToString().Split(',');
+                    if (info[1] == "{0}")
                     {
-                        GetPlayerData(0.ToString(), i);
+                        GetPlayerData(0.ToString(), Convert.ToInt32(info[0]));
                     }
                 }
-               
-                //0为可用，1为准备中，2为已经开始游戏
-                if (roomState == 0 || roomState == 1)
+
+                //0为可用，1为已经开始游戏
+                if (roomState == 0)
                 {
                     pbRoomState.Image = Properties.Resources.tablen;
-                    pbPlay1.Cursor = Cursors.Hand;
-                    pbPlay2.Cursor = Cursors.Hand;
-                    pbPlay3.Cursor = Cursors.Hand;
-                    pbPlay4.Cursor = Cursors.Hand;
                 }
-                else if (roomState == 2)
+                else if (roomState == 1)
                 {
                     //更换图标
                     pbRoomState.Image = Properties.Resources.tables;
@@ -220,7 +264,7 @@ namespace 飞行棋
         #region 房间图片控件悬浮
         private void pbRoomState_MouseEnter(object sender, EventArgs e)
         {
-            if (roomState == 2)
+            if (roomState == 1)
             {
                 return;
             }
@@ -228,7 +272,7 @@ namespace 飞行棋
         }
         private void pbRoomState_MouseLeave(object sender, EventArgs e)
         {
-            if (roomState == 2)
+            if (roomState == 1)
             {
                 return;
             }
@@ -244,7 +288,7 @@ namespace 飞行棋
         //进入房间
         private void pbRoomState_Click(object sender, EventArgs e)
         {
-            if (roomState == 2)
+            if (roomState == 1)
             {
                 return;
             }
@@ -258,7 +302,7 @@ namespace 飞行棋
         //进入房间
         private void pbPlay1_Click(object sender, EventArgs e)
         {
-            if (roomState == 2)
+            if (roomState == 1)
             {
                 return;
             }
