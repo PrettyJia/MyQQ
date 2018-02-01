@@ -945,7 +945,7 @@
             // 
             // tShowRandNum
             // 
-            this.tShowRandNum.Interval = 50;
+            this.tShowRandNum.Interval = 20;
             this.tShowRandNum.Tick += new System.EventHandler(this.tShowRandNum_Tick);
             // 
             // lblTime20
@@ -1019,7 +1019,7 @@
             // lblPlay4Name
             // 
             this.lblPlay4Name.AutoSize = true;
-            this.lblPlay4Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay4Name.ForeColor = System.Drawing.Color.DimGray;
             this.lblPlay4Name.Location = new System.Drawing.Point(145, 94);
             this.lblPlay4Name.Name = "lblPlay4Name";
             this.lblPlay4Name.Size = new System.Drawing.Size(41, 12);
@@ -1030,7 +1030,7 @@
             // lblPlay1Name
             // 
             this.lblPlay1Name.AutoSize = true;
-            this.lblPlay1Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay1Name.ForeColor = System.Drawing.Color.DimGray;
             this.lblPlay1Name.Location = new System.Drawing.Point(867, 94);
             this.lblPlay1Name.Name = "lblPlay1Name";
             this.lblPlay1Name.Size = new System.Drawing.Size(41, 12);
@@ -1041,7 +1041,7 @@
             // lblPlay3Name
             // 
             this.lblPlay3Name.AutoSize = true;
-            this.lblPlay3Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay3Name.ForeColor = System.Drawing.Color.DimGray;
             this.lblPlay3Name.Location = new System.Drawing.Point(159, 547);
             this.lblPlay3Name.Name = "lblPlay3Name";
             this.lblPlay3Name.Size = new System.Drawing.Size(41, 12);
@@ -1088,7 +1088,7 @@
             // lblPlay2Name
             // 
             this.lblPlay2Name.AutoSize = true;
-            this.lblPlay2Name.ForeColor = System.Drawing.Color.White;
+            this.lblPlay2Name.ForeColor = System.Drawing.Color.DimGray;
             this.lblPlay2Name.Location = new System.Drawing.Point(841, 552);
             this.lblPlay2Name.Name = "lblPlay2Name";
             this.lblPlay2Name.Size = new System.Drawing.Size(41, 12);

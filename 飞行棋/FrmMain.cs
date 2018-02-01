@@ -281,20 +281,47 @@ namespace 飞行棋
             }
             return true;
         }
-        private int[] playerPosition = new int[4];//4个玩家的位置
+        private int[] playerPosition = {1,19,37,55};//4个玩家的位置
         private void btnGo_Click(object sender, EventArgs e)
         {
-            btnGo.Enabled = false;
-            Random random = new Random();
-            int step = random.Next(1, 7);
-            //如果等于6增加一次机会 
-
-
+            tRefreshRoom.Stop();//动画开始的时候停止刷新数据
+            btnGo.Visible = false;
+            //向数据库中插入一条数据,并移动
+            int num=InsertGoInfo();
+            Go(num);
+            //刷新房间数据
+            ///tRefreshRoom.Start();
         }
+
+        /// <summary>
+        /// 插入移动数据，获取移动量
+        /// </summary>
+        /// <returns></returns>
+        private int InsertGoInfo()
+        {
+            int num = -1;
+            string sql = string.Format(@"insert into RoomState (rid,seat)
+values({0}, {1});select num from RoomState where std= @@identity", roomId,seatId);
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql,dbHelper.Connection);
+                num=Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+            return num;
+        }
+
         private Control willMoveControl = null;//即将移动的控件
         private void Go(int step)
         {
-            tRefreshRoom.Stop();//动画开始的时候停止刷新数据
             randShowNum[randShowNum.Length - 1] = step;
             tShowRandNum.Start();
         }
@@ -392,7 +419,6 @@ namespace 飞行棋
                 //35   p3
                 //53   p4
                 //71   p1
-
                 switch (i)
                 {
                     case 11:
@@ -443,7 +469,7 @@ namespace 飞行棋
                         i++;
                         break;
                 }
-                playerPosition[0] = end;
+                playerPosition[Convert.ToInt32(seatId) - 1] = end;
             }
         }
 
@@ -466,8 +492,25 @@ namespace 飞行棋
             {
                 showIndex = 0;
                 tShowRandNum.Stop();
-                //开始移动飞机
-                MoveFly(playerPosition[0] + 1, playerPosition[0] + randShowNum[39]);
+                //开始移动飞机,移动谁的飞机？
+                int seat = Convert.ToInt32(seatId);
+                switch (seat)
+                {
+                    case 1:
+                        willMoveControl =lblPlayer1;
+                        break;
+                    case 2:
+                        willMoveControl = lblPlayer2;
+                        break;
+                    case 3:
+                        willMoveControl = lblPlayer3;
+                        break;
+                    case 4:
+                        willMoveControl = lblPlayer4;
+                        break;
+
+                }
+                MoveFly(playerPosition[seat-1], playerPosition[seat-1] + randShowNum[39]);
                 //动画结束才开始刷新数据
                 tRefreshRoom.Start();
             }
@@ -537,6 +580,10 @@ namespace 飞行棋
                         int seat = Convert.ToInt32(reader["seat"]);
                         int state = Convert.ToInt32(reader["state"]);
                         GetPlayerInfo(uid, seat, state);
+                        if (uid.ToString()==id)
+                        {
+                            seatId = seat.ToString();
+                        }
                     }
                 }
 
@@ -557,22 +604,25 @@ namespace 飞行棋
                 //lblPlayer1State
                 Control pbcontrol = this.Controls.Find("pbPlay" + i, true)[0];
                 Label lblControl = Controls.Find("lblPlayer" + i + "State", true)[0] as Label;
+                Label nickName=Controls.Find("lblPlay" + i + "Name", true)[0] as Label;
                 //判断没有座位
                 if (pbcontrol.Tag.ToString() == (i + ",{0}"))
                 {
                     ControlUtils.ChangeToRect(pbcontrol);
-                    lblControl.Text ="";
+                    lblControl.Text = "";
+                    nickName.Text = "";
+                    nickName.Visible = false;
                     (pbcontrol as PictureBox).Image = Properties.Resources.Seat;
                 }
                 else
                 {
                     ControlUtils.ChangeToCircle(pbcontrol);
                     //获取对应座位的玩家
-                    int uid =Convert.ToInt32(pbcontrol.Tag.ToString().Split(',')[1]);
+                    int uid = Convert.ToInt32(pbcontrol.Tag.ToString().Split(',')[1]);
                     //有座位的判断准备状态
                     if (!GetUserReaday(uid))
                     {
-                        lblControl.Text ="";
+                        lblControl.Text = "";
                         lblControl.Visible = false;
                         if (seatId == i.ToString())
                         {
@@ -582,7 +632,7 @@ namespace 飞行棋
                     else
                     {
                         //判断自己是否已经准备
-                        if (seatId==i.ToString())
+                        if (seatId == i.ToString())
                         {
                             this.btnReady.Visible = false;
                         }
@@ -607,7 +657,7 @@ namespace 飞行棋
                 dbHelper.Connection.Open();
                 SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
                 int result = Convert.ToInt32(command.ExecuteScalar());
-                if (result==1)
+                if (result == 1)
                 {
                     isReady = true;
                 }
@@ -630,14 +680,47 @@ namespace 飞行棋
         private void GetPlayerInfo(int id, int seat, int state)
         {
             //获取头像编号
-            string sql = "select face from Users where id=" + id;
-            string face = string.Empty;
+            string sql = "select face,nickName from Users where id=" + id;
             DBHelper dbHelper = new DBHelper();
+            SqlDataReader reader = null;
             try
             {
                 dbHelper.Connection.Open();
                 SqlCommand command = new SqlCommand(sql, dbHelper.Connection);
-                face = command.ExecuteScalar().ToString();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string face = reader["face"].ToString();
+                    string nickName = reader["nickName"].ToString();
+                    switch (seat)
+                    {
+                        case 1:
+                            pbPlay1.Tag = string.Format(pbPlay1.Tag.ToString(), id);
+                            pbPlay1.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                            lblPlay1Name.Text = nickName;
+                            lblPlay1Name.Visible = true;
+                            break;
+                        case 2:
+                            pbPlay2.Tag = string.Format(pbPlay2.Tag.ToString(), id);
+                            pbPlay2.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                            lblPlay2Name.Text = nickName;
+                            lblPlay2Name.Visible = true;
+                            break;
+                        case 3:
+                            pbPlay3.Tag = string.Format(pbPlay3.Tag.ToString(), id);
+                            pbPlay3.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                            lblPlay3Name.Text = nickName;
+                            lblPlay3Name.Visible = true;
+                            break;
+                        case 4:
+                            pbPlay4.Tag = string.Format(pbPlay4.Tag.ToString(), id);
+                            pbPlay4.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
+                            lblPlay4Name.Text = nickName;
+                            lblPlay4Name.Visible = true;
+                            break;
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -647,26 +730,8 @@ namespace 飞行棋
                 dbHelper.Connection.Close();
             }
 
-            switch (seat)
-            {
-                case 1:
-                    pbPlay1.Tag = string.Format(pbPlay1.Tag.ToString(), id);
-                    pbPlay1.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
-                    break;
-                case 2:
-                    pbPlay2.Tag = string.Format(pbPlay2.Tag.ToString(), id);
-                    pbPlay2.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
-                    break;
-                case 3:
-                    pbPlay3.Tag = string.Format(pbPlay3.Tag.ToString(), id);
-                    pbPlay3.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
-                    break;
-                case 4:
-                    pbPlay4.Tag = string.Format(pbPlay4.Tag.ToString(), id);
-                    pbPlay4.Image = Properties.Resources.ResourceManager.GetObject(face) as Image;
-                    break;
-            }
-           
+
+
         }
         /// <summary>
         /// 更改房间状态为游戏中
@@ -718,21 +783,29 @@ namespace 飞行棋
             }
             return false;
         }
-
+        /// <summary>
+        /// 开始游戏
+        /// </summary>
         private void Gameing()
         {
             if (GetPlayCount() == 0)
             {
                 //判断是否是第一次掷骰子，如果是从第一个开始投
+                //获取第一个座位
+                int seat = GetFirstSeat(roomId);
                 //各自判断是否是第一个位
-                if (seatId == "1")
+                if (seat.ToString()==seatId)
                 {
+                    tRefreshRoom.Stop();
                     //倒计时
+                    tTime20.Start();
+                    btnGo.Visible = true;
                     //更新位置
                 }
             }
             else
             {
+                return;
                 //如果不是第一次掷骰子，获取上次走步数据
                 //如果是当前用户，进入掷骰子流程
                 //不是当前用户，则刷新走步数据
@@ -805,13 +878,35 @@ namespace 飞行棋
             }
         }
 
+        private int GetFirstSeat(string roomId)
+        {
+            string sql = "select top 1 seat from RoomPlayer where rid="+roomId;
+            DBHelper dbHelper = new DBHelper();
+            try
+            {
+                dbHelper.Connection.Open();
+                SqlCommand command = new SqlCommand(sql,dbHelper.Connection);
+                int seat=Convert.ToInt32(command.ExecuteScalar());
+                return seat;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                dbHelper.Connection.Close();
+            }
+            return -1;
+        }
+
         /// <summary>
         /// 获取房间掷骰子的次数
         /// </summary>
         /// <returns></returns>
         private int GetPlayCount()
         {
-            string sql = "select count(*) from RoomPlayer where rid=" + roomId;
+            string sql = "select count(*) from RoomState where rid=" + roomId;
             DBHelper dbHelper = new DBHelper();
             try
             {
